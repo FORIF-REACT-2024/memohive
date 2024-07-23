@@ -3,31 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  --lola-50: 320 20% 97%;
+  --lola-100: 324 19% 95%;
+  --lola-200: 324 19% 90%;
+  --lola-300: 327 18% 81%;
+  --lola-400: 328 18% 70%;
+  --lola-500: 330 17% 60%;
+  --lola-600: 333 15% 51%;
+  --lola-700: 335 17% 42%;
+  --lola-800: 336 16% 35%;
+  --lola-900: 337 15% 30%;
+  --lola-950: 336 17% 17%;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+  --conblue-50: 212 100% 97%;
+  --conblue-100: 212 94% 94%;
+  --conblue-200: 208 92% 86%;
+  --conblue-300: 207 94% 74%;
+  --conblue-400: 206 91% 60%;
+  --conblue-500: 206 87% 48%;
+  --conblue-600: 208 96% 39%;
+  --conblue-700: 208 94% 32%;
+  --conblue-800: 208 88% 26%;
+  --conblue-900: 209 79% 24%;
+  --conblue-950: 214 78% 16%;
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  --memo-yellow: 45 75% 56%;
+  --memo-yellow-text: 24 64% 31%;
+  --memo-yellow-button: 45 75% 56%;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  --memo-green: 66 76% 95%;
+  --memo-green-text: 75 59% 23%;
+  --memo-green-button: 71 66% 55%;
+
+  --memo-purple: 264 65% 95%;
+  --memo-purple-text: 270 45% 39%;
+  --memo-purple-button: 267 65% 75%;
+
+  --memo-pink: 309 64% 98%;
+  --memo-pink-text: 305 61% 83%;
+  --memo-pink-button: 309 46% 33%;
+
+  --button-gray: 240 11% 91%;
+  --button-gray-hover: 240 5% 79%;
 }
