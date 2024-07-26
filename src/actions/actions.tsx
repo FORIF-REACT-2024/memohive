@@ -8,29 +8,26 @@ import { updateUser } from './user'
 
 // const prisma = new PrismaClient()
 
-// async function main() {
-//   // ... you will write your Prisma Client queries here
+async function main() {
+  // ... you will write your Prisma Client queries here
 
-//   await prisma.user.create({
-//     data: {
-//       username: 'Rich',
-//       email: 'hello@prisma.com',
-//     },
-//   })
+  // await prisma.user.create({
+  //   data: {
+  //     username: 'Rich',
+  //     email: 'hello@prisma.com',
+  //   },
+  // })
 
-//   const allUsers = await prisma.user.findMany()
-//   console.log(allUsers)
-// }
+  // const allUsers = await prisma.user.findMany()
+  // console.log(allUsers)
 
-// main()
-//   .catch(async (e) => {
-//     console.error(e)
-//     process.exit(1)
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect()
-//   })
+  const update = await updateUser(
+    '66a368e653c5ec9350f76b40',
+    'seongjineeeemong',
+  )
+  console.log(update)
+}
 
-updateUser('66a3683c5ec9350f76b40', 'seongjineeeemong').catch(async (e) => {
+main().catch(async (e) => {
   console.log(e)
 })
