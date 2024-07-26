@@ -1,6 +1,11 @@
+/**
+ * * API User
+ */
+
 'use server'
 
 import prisma from '@/lib/db'
+import CustomResponse from '@/lib/error'
 
 // 사용자 생성
 export async function createUser(email: string, username: string) {
@@ -11,8 +16,9 @@ export async function createUser(email: string, username: string) {
         username,
       },
     })
+    return new CustomResponse('200', 'Success')
   } catch (e) {
-    console.log(e)
+    return new CustomResponse(e.code, e.message)
   }
 }
 
@@ -25,8 +31,9 @@ export async function updateUser(id: string, username: string) {
         username,
       },
     })
+    return new CustomResponse('200', 'Success')
   } catch (e) {
-    console.log(e)
+    return new CustomResponse(e.code, e.message)
   }
 }
 
@@ -36,7 +43,8 @@ export async function removeUser(id: string) {
     await prisma.user.delete({
       where: { id },
     })
+    return new CustomResponse('200', 'Success')
   } catch (e) {
-    console.log(e)
+    return new CustomResponse(e.code, e.message)
   }
 }
