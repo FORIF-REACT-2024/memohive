@@ -41,6 +41,7 @@ model Memo {
   board     Board    @relation(fields: [boardId], references: [id])
   boardId   String   @db.ObjectId
   document  String?
+  color     String?
 }
 
 // At initial, run prisma generate to add models
