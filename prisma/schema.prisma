@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  email       String   @unique
+  username    String?
+  boards      String[]
+}
+
+model Board {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String?
+  isPublic    Boolean
+  summary     String?
+  memos       String[]
+}
+
+model Memo {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  document    String?
+}
+
+// At initial, run prisma generate to add models
+
+// Whenever you update your Prisma schema, 
+// you will need to run the prisma db push command to create new indexes and regenerate Prisma Client.
+
+// If server pushes this Error
+// //Prisma needs to perform transactions, which requires your MongoDB server to be run as a replica set.
+// Then see https://medium.com/@engr.omoalfa/enable-replica-set-automatically-on-your-local-mongodb-server-b9136c2f475a
