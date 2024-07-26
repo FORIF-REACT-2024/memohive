@@ -5,14 +5,6 @@ const prisma = new PrismaClient()
 async function main() {
   // ... you will write your Prisma Client queries here
 
-  const create = await prisma.user.create({
-    data: {
-      email: 'glisvast@icloud.com',
-      username: 'Seongjinemong',
-      boards: []
-    },
-  })
-
   const allUsers = await prisma.user.findMany({
     
   })
