@@ -18,3 +18,5 @@ ex) /Users/chojake/docker/mongodb
 
 위와 같은 절차를 다 거쳤다면 아래의 경로로 데이터베이스 접속 가능
 > mongodb://root:password@localhost:27017/memohive?retryWrites=true&w=majority&authSource=admin&directConnection=true
+
+!! 현재 윈도우에서는 로컬로 저장한 키에 대하여 wsl 에서 권한을 받지 못해 mongo 인스턴스에서 key를 읽지 못하는 문제가 발생
