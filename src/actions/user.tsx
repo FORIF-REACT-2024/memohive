@@ -38,7 +38,7 @@ export async function updateUser(id: string, username: string) {
 }
 
 // 사용자 제거
-export async function removeUser(id: string) {
+export async function deleteUser(id: string) {
   try {
     await prisma.user.delete({
       where: { id },
