@@ -16,7 +16,5 @@ ex) /Users/chojake/docker/mongodb
 \> rs.initiate({_id: "myReplicaSet", members:[{_id:0, host:"mongo1"}, {_id:1, host:"mongo2"}, {_id:2, host:"mongo3"}]});  
 7. localhost:8081 로 접속하여 memohive 데이터베이스 생성
 
-위와 같은 절차를 다 거쳤다면
+위와 같은 절차를 다 거쳤다면 아래의 경로로 데이터베이스 접속 가능
 > mongodb://root:password@localhost:27017/memohive?retryWrites=true&w=majority&authSource=admin&directConnection=true
-
-위의 경로로 데이터베이스 접속 가능
