@@ -70,6 +70,9 @@ const config: Config = {
       boxShadow: {
         inner: 'inset 1px 2px 2px 0 rgba(0, 0, 0, 0.25)',
       },
+      width: {
+        container: '1200px',
+      },
     },
   },
   plugins: [],
