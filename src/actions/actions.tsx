@@ -2,9 +2,14 @@
  * * This file is for testing
  */
 
-import { createBoard, updateBoardSummary, updateBaordShare, getUserBoards } from './board'
+import {
+  createBoard,
+  updateBoardSummary,
+  updateBaordShare,
+  getUserBoards,
+} from './board'
 import { createMemo, getBoardMemos, updateMemo, updateMemoColor } from './memo'
-import { getUser, updateUser } from './user'
+import { createUser, getUser, updateUser } from './user'
 
 // import { PrismaClient } from '@prisma/client'
 
@@ -13,21 +18,9 @@ import { getUser, updateUser } from './user'
 async function main() {
   // ... you will write your Prisma Client queries here
 
-  // await prisma.user.create({
-  //   data: {
-  //     username: 'Rich',
-  //     email: 'hello@prisma.com',
-  //   },
-  // })
+  const create = await createUser('sj203904@outlook.com', 'sj20304')
 
-  // const allUsers = await prisma.user.findMany()
-  // console.log(allUsers)
-
-  const update = await updateUser(
-    '66a368e653c5ec9350f76b40',
-    'seongjineeeemong',
-  )
-  console.log(update)
+  console.log(create)
 }
 
 async function createBoardTest() {
@@ -83,12 +76,11 @@ async function getUserBoardsTest() {
   console.log(boards)
 }
 
-
 async function getBoardMemosTest() {
   const boards = await getBoardMemos('66a48becf5c8491841e268bb')
   console.log(boards)
 }
 
-getBoardMemosTest().catch(async (e) => {
+main().catch(async (e) => {
   console.log(e)
 })
