@@ -65,9 +65,10 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'radial-gradient': 'radial-gradient( var(--tw-gradient-stops))',
+      },
+      boxShadow: {
+        inner: 'inset 1px 2px 2px 0 rgba(0, 0, 0, 0.25)',
       },
     },
   },
