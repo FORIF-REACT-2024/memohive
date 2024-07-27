@@ -2,9 +2,9 @@
  * * This file is for testing
  */
 
-import { createBoard, updateBoardSummary, updateBaordShare } from './board'
-import { createMemo, updateMemo, updateMemoColor } from './memo'
-import { updateUser } from './user'
+import { createBoard, updateBoardSummary, updateBaordShare, getUserBoards } from './board'
+import { createMemo, getBoardMemos, updateMemo, updateMemoColor } from './memo'
+import { getUser, updateUser } from './user'
 
 // import { PrismaClient } from '@prisma/client'
 
@@ -73,6 +73,22 @@ async function updateMemoTest() {
   console.log(update2)
 }
 
-updateMemoTest().catch(async (e) => {
+async function getUserTest() {
+  const user = await getUser('66a368e653c5ec9350f76b40')
+  console.log(user)
+}
+
+async function getUserBoardsTest() {
+  const boards = await getUserBoards('66a368e653c5ec9350f76b40')
+  console.log(boards)
+}
+
+
+async function getBoardMemosTest() {
+  const boards = await getBoardMemos('66a48becf5c8491841e268bb')
+  console.log(boards)
+}
+
+getBoardMemosTest().catch(async (e) => {
   console.log(e)
 })
