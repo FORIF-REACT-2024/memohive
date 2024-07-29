@@ -1,86 +1,145 @@
+# Using three mongo instances for replica
+
 # Use root/example as user/password credentials
 # Use localpath as your local path
 # version: '3.9'
 
+# services:
+#   mongo1:
+#     image: mongo
+#     hostname: mongo1
+#     container_name: mongo1
+#     restart: unless-stopped
+#     ports:
+#       - '27017:27017'
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#     volumes:
+#       - localpath/mongo1/configdb:/data/configdb/
+#       - localpath/mongo1/db:/data/db/
+#       - localpath/key/mongodb.key:/etc/mongodb.key
+#     command:
+#       - '--replSet'
+#       - 'myReplicaSet'
+#       - '--keyFile'
+#       - '/etc/mongodb.key'
+#       - '--bind_ip_all'
+
+#   mongo2:
+#     image: mongo
+#     hostname: mongo2
+#     container_name: mongo2
+#     restart: unless-stopped
+#     ports:
+#       - '27018:27017'
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#     depends_on:
+#       - mongo1
+#     volumes:
+#       - localpath/mongo2/configdb:/data/configdb/
+#       - localpath/mongo2/db:/data/db/
+#       - localpath/key/mongodb.key:/etc/mongodb.key
+#     command:
+#       - '--replSet'
+#       - 'myReplicaSet'
+#       - '--keyFile'
+#       - '/etc/mongodb.key'
+#       - '--bind_ip_all'
+  
+#   mongo3:
+#     image: mongo
+#     hostname: mongo3
+#     container_name: mongo3
+#     restart: unless-stopped
+#     ports:
+#       - '27019:27017'
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#     depends_on:
+#       - mongo2
+#     volumes:
+#       - localpath/mongo3/configdb:/data/configdb/
+#       - localpath/mongo3/db:/data/db/
+#       - localpath/key/mongodb.key:/etc/mongodb.key
+#     command:
+#       - '--replSet'
+#       - 'myReplicaSet'
+#       - '--keyFile'
+#       - '/etc/mongodb.key'
+#       - '--bind_ip_all'
+
+#   mongo-express:
+#     image: mongo-express
+#     restart: unless-stopped
+#     ports:
+#       - '8081:8081'
+#     environment:
+#       ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#       ME_CONFIG_MONGODB_ADMINPASSWORD: example
+#       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/?directConnection=true
+#       ME_CONFIG_BASICAUTH: false
+
+# networks:
+#   default:
+#     name: mongoCluster
+
+
+
+# using one mongodb instance for replica
+name: prisma-mongodb
+
+# services:
+#   mongo6:
+#     build:
+#       context: ./mongodb_replica
+#       args:
+#         MONGO_VERSION: 6
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#       MONGO_REPLICA_HOST: 127.0.0.1
+#       MONGO_REPLICA_PORT: 27017
+#       # Use "mongo" instead of "mongosh" before v5.0
+#       MONGO_COMMAND: 'mongosh'
+#     volumes:
+#       - ./mongo/configdb:/data/configdb/
+#       - ./mongo/db:/data/db/
+#     ports:
+#       - '27017:27017'
+#     restart: unless-stopped
+#     healthcheck:
+#       # Use "mongo" instead of "mongosh" before v5.0
+#       test: ['CMD', 'mongosh', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok"]
+#       interval: 5s
+#       timeout: 2s
+#       retries: 20
+
 services:
-  mongo1:
-    image: mongo
-    hostname: mongo1
-    container_name: mongo1
-    restart: unless-stopped
+  mongo:
+    build:
+      context: ./mongodb_replica
+      args:
+        MONGO_VERSION: 4
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: <root>
+      MONGO_INITDB_ROOT_PASSWORD: <example>
+      MONGO_REPLICA_HOST: 127.0.0.1
+      MONGO_REPLICA_PORT: 27017
+      # Use "mongo" instead of "mongosh" before v5.0
+      MONGO_COMMAND: 'mongo'
+    volumes:
+      - ./mongo/configdb:/data/configdb/
+      - ./mongo/db:/data/db/
     ports:
       - '27017:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
-      - localpath/mongo1/configdb:/data/configdb/
-      - localpath/mongo1/db:/data/db/
-      - localpath/key/mongodb.key:/etc/mongodb.key
-    command:
-      - '--replSet'
-      - 'myReplicaSet'
-      - '--keyFile'
-      - '/etc/mongodb.key'
-      - '--bind_ip_all'
-
-  mongo2:
-    image: mongo
-    hostname: mongo2
-    container_name: mongo2
     restart: unless-stopped
-    ports:
-      - '27018:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    depends_on:
-      - mongo1
-    volumes:
-      - localpath/mongo2/configdb:/data/configdb/
-      - localpath/mongo2/db:/data/db/
-      - localpath/key/mongodb.key:/etc/mongodb.key
-    command:
-      - '--replSet'
-      - 'myReplicaSet'
-      - '--keyFile'
-      - '/etc/mongodb.key'
-      - '--bind_ip_all'
-  
-  mongo3:
-    image: mongo
-    hostname: mongo3
-    container_name: mongo3
-    restart: unless-stopped
-    ports:
-      - '27019:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    depends_on:
-      - mongo2
-    volumes:
-      - localpath/mongo3/configdb:/data/configdb/
-      - localpath/mongo3/db:/data/db/
-      - localpath/key/mongodb.key:/etc/mongodb.key
-    command:
-      - '--replSet'
-      - 'myReplicaSet'
-      - '--keyFile'
-      - '/etc/mongodb.key'
-      - '--bind_ip_all'
-
-  mongo-express:
-    image: mongo-express
-    restart: unless-stopped
-    ports:
-      - '8081:8081'
-    environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/?directConnection=true
-      ME_CONFIG_BASICAUTH: false
-
-networks:
-  default:
-    name: mongoCluster
+    healthcheck:
+      # Use "mongo" instead of "mongosh" before v5.0
+      test: ['CMD', 'mongo', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
