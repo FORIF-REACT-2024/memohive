@@ -18,7 +18,7 @@ const memoStyles = cva(
 )
 
 interface LandingMemoProps extends VariantProps<typeof memoStyles> {
-  children: React.ReactNode
+  children?: React.ReactNode
   classname?: string
 }
 
