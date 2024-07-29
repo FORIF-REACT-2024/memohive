@@ -90,19 +90,56 @@
 
 
 # using one mongodb instance for replica
+name: prisma-mongodb
+
+# services:
+#   mongo6:
+#     build:
+#       context: ./mongodb_replica
+#       args:
+#         MONGO_VERSION: 6
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: example
+#       MONGO_REPLICA_HOST: 127.0.0.1
+#       MONGO_REPLICA_PORT: 27017
+#       # Use "mongo" instead of "mongosh" before v5.0
+#       MONGO_COMMAND: 'mongosh'
+#     volumes:
+#       - ./mongo/configdb:/data/configdb/
+#       - ./mongo/db:/data/db/
+#     ports:
+#       - '27017:27017'
+#     restart: unless-stopped
+#     healthcheck:
+#       # Use "mongo" instead of "mongosh" before v5.0
+#       test: ['CMD', 'mongosh', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok"]
+#       interval: 5s
+#       timeout: 2s
+#       retries: 20
+
 services:
   mongo:
-    build: ./mongodb_rs
-    restart: unless-stopped
+    build:
+      context: ./mongodb_replica
+      args:
+        MONGO_VERSION: 4
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: memohive
-      MONGO_REPLICA_HOST: localhost
+      MONGO_INITDB_ROOT_USERNAME: <root>
+      MONGO_INITDB_ROOT_PASSWORD: <example>
+      MONGO_REPLICA_HOST: 127.0.0.1
       MONGO_REPLICA_PORT: 27017
-    ports:
-      - '27017:27017'
+      # Use "mongo" instead of "mongosh" before v5.0
+      MONGO_COMMAND: 'mongo'
     volumes:
       - ./mongo/configdb:/data/configdb/
       - ./mongo/db:/data/db/
-      - ./key/mongodb.key:/etc/mongodb.key
+    ports:
+      - '27017:27017'
+    restart: unless-stopped
+    healthcheck:
+      # Use "mongo" instead of "mongosh" before v5.0
+      test: ['CMD', 'mongo', 'admin', '--port', '27017', '--eval', "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
