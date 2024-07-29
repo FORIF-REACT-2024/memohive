@@ -17,7 +17,7 @@ mongodb+srv://<user>:<password>@******.******.mongodb.net/<database>?retryWrites
 
 [Docker](https://www.docker.com/) 를 설치합니다.
 
-`docker-compose.yml` 파일과 `mongodb_replica` 폴더를 외부 임의의 경로에 복사합니다.
+`DB/docker-compose.yml` 파일과 `DB/mongodb_replica` 폴더를 외부 임의의 경로에 복사합니다.
 
 복사한 `docker-compose.yml` 파일 내에서 `root` 와 `password` 를 임의의 데이터베이스의 접근 계정으로 수정합니다.  
 ```
