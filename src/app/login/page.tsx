@@ -8,10 +8,11 @@ const Login = () => {
     <div>
       <Layer>
         <div className="relative w-96 top-40 mx-auto">
-          <LandingMemo>dkdkdk</LandingMemo>
-          <LandingMemo color={'blue'} classname="absolute left-16 top-16">
-            dkdkdk
-          </LandingMemo>
+          <LandingMemo></LandingMemo>
+          <LandingMemo
+            color={'blue'}
+            classname="absolute left-16 top-16"
+          ></LandingMemo>
           <LogInButton />
         </div>
       </Layer>

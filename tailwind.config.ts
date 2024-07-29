@@ -56,11 +56,11 @@ const config: Config = {
             text: 'hsl(var(--memo-pink-text))',
             button: 'hsl(var(--memo-pink-button))',
           },
-          button: {
-            gray: {
-              DEFAULT: 'hsl(var(--memo-button-gray))',
-              hover: 'hsl(var(--memo-button-gray-hover))',
-            },
+        },
+        button: {
+          gray: {
+            DEFAULT: 'hsl(var(--button-gray))',
+            hover: 'hsl(var(--button-gray-hover))',
           },
         },
       },
@@ -71,7 +71,17 @@ const config: Config = {
         inner: 'inset 1px 2px 2px 0 rgba(0, 0, 0, 0.25)',
       },
       width: {
+        boardlistitem: '200px',
+      },
+      height: {
+        boardlistitem: '200px',
+      },
+      maxWidth: {
         container: '1200px',
+        boardlist: '1000px',
+      },
+      minHeight: {
+        boardlist: '280px',
       },
     },
   },
