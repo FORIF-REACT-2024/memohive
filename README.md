@@ -35,14 +35,20 @@ mongodb://<root>:<password>@localhost:27017/memohive?retryWrites=true&w=majority
 
 
 ### Service
-`.env` 파일을 생성한 후 DB 를 생성할 때 만들어진 데이터베이스 경로를 아래와 같이 넣어줍니다.
-```
-DATABASE_URL="root:password@localhost:27017/memohive?retryWrites=true&w=majority&authSource=admin&directConnection=true"
-```
 
 아래의 커맨드를 통해 필요한 모듈을 설치합니다.
 ```
 # npm i
+```
+
+`.env` 파일을 생성한 후 DB 를 생성할 때 만들어진 데이터베이스 경로를 아래와 같이 넣어줍니다.
+```
+DATABASE_URL="<root>:<password>@localhost:27017/memohive?retryWrites=true&w=majority&authSource=admin&directConnection=true"
+```
+아래의 커맨드를 통해 Prisma 와 DB 를 초기화해줍니다.
+```
+npx prisma generate
+npx prisma db push
 ```
 
 [Next.js](https://nextjs.org/) 기반으로 만들어진 프로젝트를 아래의 방법 중 하나로 실행합니다.
