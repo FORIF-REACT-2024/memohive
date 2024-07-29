@@ -5,7 +5,7 @@ const BoardListItem = () => {
   return (
     <div className="w-boardlistitem h-boardlistitem p-6 rounded-xl bg-gradient-to-br from-lola-100 to-conblue-100/70 drop-shadow-md flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <form action="submit">
+        <form>
           <input
             type="text"
             placeholder="Title"
@@ -14,7 +14,7 @@ const BoardListItem = () => {
         </form>
         <DeleteButton />
       </div>
-      <form action="submit">
+      <form>
         <input
           type="text"
           placeholder="보드 설명"
