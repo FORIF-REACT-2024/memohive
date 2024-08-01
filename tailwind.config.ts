@@ -72,6 +72,7 @@ const config: Config = {
       },
       width: {
         boardlistitem: '200px',
+        boardlist: '1000px',
       },
       height: {
         boardlistitem: '200px',
