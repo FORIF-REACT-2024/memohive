@@ -5,7 +5,7 @@
 'use server'
 
 import prisma from '@/lib/db'
-import CustomResponse from '@/lib/error'
+import CustomResponse from '@/lib/res'
 
 /**
  * TODO 본인 소유의 보드인지 확인, 아니라면 isPublic 확인 후 true 라면 추가
@@ -42,7 +42,7 @@ export async function getBoardMemos(boardId: string) {
       where: { boardId },
     })
 
-    return memos
+    return new CustomResponse('200', 'Success', memos)
   } catch (e) {
     return new CustomResponse(e.code, e.message)
   }
@@ -106,8 +106,9 @@ export async function haveMemo(userId: string, memoId: string) {
       where: { id: memoId },
     })
 
-    if (memo?.authorId === userId) return true
-    return false
+    if (memo?.authorId === userId)
+      return new CustomResponse('200', 'Success', true)
+    return new CustomResponse('200', 'Success', false)
   } catch (e) {
     return new CustomResponse(e.code, e.message)
   }
