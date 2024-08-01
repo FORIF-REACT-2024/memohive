@@ -5,7 +5,7 @@
 'use server'
 
 import prisma from '@/lib/db'
-import CustomResponse from '@/lib/error'
+import CustomResponse from '@/lib/res'
 
 /**
  * TODO Username Unique Error에 대한 처리 필요
@@ -31,7 +31,7 @@ export async function getUser(id: string) {
     const user = await prisma.user.findFirst({
       where: { id },
     })
-    return user
+    return new CustomResponse('200', 'Success', user)
   } catch (e) {
     return new CustomResponse(e.code, e.message)
   }
