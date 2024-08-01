@@ -2,10 +2,12 @@ import { Board } from '@/lib/types'
 import { getUserBoards } from '@api/board'
 
 export default async function Home() {
-  const boards = await getUserBoards('66aa522093d7601408509951').then((res) => {
-    console.log(res.data)
-    return res.data
-  })
+  const boards: Board[] = await getUserBoards('66aa522093d7601408509951').then(
+    (res) => {
+      console.log(res.data)
+      return res.data
+    },
+  )
 
   return (
     <div className="w-full flex justify-center flex-col">
