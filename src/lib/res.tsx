@@ -4,12 +4,13 @@
  * @param message Error message, 'Success' if OK
  */
 
-export default class CustomResponse {
+export default class CustomResponse extends Object {
   code: string
   data?: any
   message: string
 
   constructor(code: string, message: string, data?: unknown) {
+    super()
     this.code = code
     this.message = message
     this.data = data ?? null

@@ -1,4 +1,4 @@
-import { createUser, getUser } from '@api/user'
+import { getUser } from '@/app/actions/user'
 import ChangeUserName from './component'
 
 export default async function Test() {
@@ -10,6 +10,8 @@ export default async function Test() {
     <div className="w-full flex justify-center items-center flex-col mt-20">
       <div className="text-center">Test</div>
       <ChangeUserName name={user} />
+
+      <div className="h-10" />
     </div>
   )
 }
