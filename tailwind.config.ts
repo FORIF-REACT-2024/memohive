@@ -75,7 +75,8 @@ const config: Config = {
       },
       height: {
         boardlistitem: '200px',
-        landingsection: '800px',
+        landingsection: '1000px',
+        landingfooter: '200px',
       },
       maxWidth: {
         container: '1200px',
