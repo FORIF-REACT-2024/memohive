@@ -6,6 +6,7 @@
 
 import prisma from '@/lib/db'
 import CustomResponse from '@/lib/res'
+import makeObject from './makeobject'
 
 /**
  * TODO Username Unique Error에 대한 처리 필요
@@ -19,9 +20,9 @@ export async function createUser(email: string, username: string) {
         username,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -31,9 +32,9 @@ export async function getUser(id: string) {
     const user = await prisma.user.findFirst({
       where: { id },
     })
-    return new CustomResponse('200', 'Success', user)
+    return makeObject(new CustomResponse('200', 'Success', user))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -49,9 +50,9 @@ export async function updateUser(id: string, username: string) {
         username,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -64,8 +65,8 @@ export async function deleteUser(id: string) {
     await prisma.user.delete({
       where: { id },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
