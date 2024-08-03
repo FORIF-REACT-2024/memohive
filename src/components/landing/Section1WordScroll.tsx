@@ -112,14 +112,47 @@ export default function Section1WordScroll() {
           y: '40%',
         })
 
+        animation[3].forEach((num, index) => {
+          tl.to(
+            `.element${index}`,
+            {
+              duration: 0.2,
+              opacity: animation[3][index],
+            },
+            index === 0 ? '<0.2' : '<',
+          )
+        })
+
+        animation[2].forEach((num, index) => {
+          tl.to(
+            `.element${index}`,
+            {
+              duration: 0.2,
+              opacity: animation[2][index],
+            },
+            index === 0 ? '>' : '<',
+          )
+        })
+
+        animation[1].forEach((num, index) => {
+          tl.to(
+            `.element${index}`,
+            {
+              duration: 0.2,
+              opacity: animation[1][index],
+            },
+            index === 0 ? '>' : '<',
+          )
+        })
+
         animation[0].forEach((num, index) => {
           tl.to(
             `.element${index}`,
             {
-              duration: 1,
+              duration: 0.2,
               opacity: animation[0][index],
             },
-            '<',
+            index === 0 ? '>' : '<',
           )
         })
       }
