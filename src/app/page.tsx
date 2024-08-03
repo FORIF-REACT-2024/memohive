@@ -35,21 +35,21 @@ export default async function Home() {
       {/* 2 */}
       <div className="flex w-full justify-center h-landingsection bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-lola-950 to-conblue-950">
         <div className="flex flex-col justify-center items-center gap-32 md:max-w-container w-full text-white text-5xl font-extrabold">
-          <RevealOnScroll classNames="w-full">
+          <RevealOnScroll classNames="w-full" duration={2000}>
             <div className="w-full text-left text-lola-300 break-keep">
               {' '}
               과거의 기억이 미래까지 이어지도록
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll classNames="w-full">
+          <RevealOnScroll classNames="w-full" duration={2000}>
             <div className="w-full text-center text-conblue-100">
               {' '}
               현재 나의 마음이 미래의 나에게 전달되도록
             </div>
           </RevealOnScroll>
 
-          <RevealOnScroll classNames="w-full">
+          <RevealOnScroll classNames="w-full" duration={2000}>
             <div className="w-full text-right text-conblue-300">
               {' '}
               지금의 벅참을 누구에게 표현할 수 있도록
@@ -61,7 +61,7 @@ export default async function Home() {
       {/* 3 */}
       <div className="flex w-full justify-center h-landingsection">
         <div className="flex flex-col justify-center items-center gap-24 md:max-w-container w-full text-5xl font-extrabold">
-          <RevealOnScroll>
+          <RevealOnScroll duration={2000}>
             <div className="bg-[linear-gradient(135deg,var(--tw-gradient-stops))] from-lola-400 to-conblue-400 inline-block text-transparent bg-clip-text">
               {' '}
               우리의 서비스는 이런 생각들에서 시작되었습니다
