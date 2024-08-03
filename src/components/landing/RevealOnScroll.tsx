@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function RevealOnScroll({
   children,
+  duration = 1000,
   classNames = '',
 }: {
   children: React.ReactNode
+  duration?: number
   classNames?: string
 }) {
   const [isVisible, setIsVisible] = useState(false)
@@ -30,7 +32,7 @@ export default function RevealOnScroll({
     }
   }, [])
 
-  const classes = `transition-opacity duration-[2000ms] 
+  const classes = `transition-opacity duration-[${duration}ms] 
       ${isVisible ? 'opacity-100' : 'opacity-0'} ${classNames}`
 
   return (
