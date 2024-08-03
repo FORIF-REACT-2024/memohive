@@ -119,7 +119,7 @@ export default function Section1WordScroll() {
               duration: 0.2,
               opacity: animation[3][index],
             },
-            index === 0 ? '<0.2' : '<',
+            index === 0 ? '<' : '<',
           )
         })
 
