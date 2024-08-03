@@ -21,10 +21,10 @@ export default function Board() {
     }
 
     getMemos()
-  }, [])
+  }, [params.id])
 
   return (
-    <div className="w-full flex items-center flex-col h-svh mt-36 text-3xl gap-6">
+    <div className="w-full flex items-center min-h-svh flex-col h-svh mt-36 text-3xl gap-6">
       <div>This page is /board/[id]</div>
       <div>[id]: {params.id}</div>
 
