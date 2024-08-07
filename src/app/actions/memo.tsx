@@ -5,7 +5,8 @@
 'use server'
 
 import prisma from '@/lib/db'
-import CustomResponse from '@/lib/error'
+import CustomResponse from '@/lib/res'
+import makeObject from './makeobject'
 
 /**
  * TODO 본인 소유의 보드인지 확인, 아니라면 isPublic 확인 후 true 라면 추가
@@ -26,9 +27,9 @@ export async function createMemo(
         color: color ?? '#BA94E8',
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -42,9 +43,9 @@ export async function getBoardMemos(boardId: string) {
       where: { boardId },
     })
 
-    return memos
+    return makeObject(new CustomResponse('200', 'Success', memos))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -60,9 +61,9 @@ export async function updateMemo(id: string, document: string) {
         document,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -78,9 +79,9 @@ export async function updateMemoColor(id: string, color: string) {
         color,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -93,9 +94,9 @@ export async function deleteMemo(id: string) {
     await prisma.memo.delete({
       where: { id },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -106,9 +107,10 @@ export async function haveMemo(userId: string, memoId: string) {
       where: { id: memoId },
     })
 
-    if (memo?.authorId === userId) return true
-    return false
+    if (memo?.authorId === userId)
+      return makeObject(new CustomResponse('200', 'Success', true))
+    return makeObject(new CustomResponse('200', 'Success', false))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }

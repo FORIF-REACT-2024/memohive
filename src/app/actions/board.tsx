@@ -5,7 +5,9 @@
 'use server'
 
 import prisma from '@/lib/db'
-import CustomResponse from '@/lib/error'
+import CustomResponse from '@/lib/res'
+import { Board } from '@/lib/types'
+import makeObject from './makeobject'
 
 // 보드 생성
 export async function createBoard(
@@ -23,9 +25,9 @@ export async function createBoard(
         summary: summary ?? '',
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -38,9 +40,9 @@ export async function getBoard(id: string) {
     const board = await prisma.board.findFirst({
       where: { id },
     })
-    return board
+    return makeObject(new CustomResponse('200', 'Success', board))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -50,13 +52,12 @@ export async function getBoard(id: string) {
 // 사용자 소유의 모든 보드 + 상세정보 반환
 export async function getUserBoards(authorId: string) {
   try {
-    const boards = await prisma.board.findMany({
+    const boards: Board[] = await prisma.board.findMany({
       where: { authorId },
     })
-
-    return boards
+    return makeObject(new CustomResponse('200', 'Success', boards))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -72,9 +73,9 @@ export async function updateBoardTitle(id: string, title: string) {
         title,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -90,9 +91,9 @@ export async function updateBoardSummary(id: string, summary: string) {
         summary,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -108,9 +109,9 @@ export async function updateBaordShare(id: string, isPublic: boolean) {
         isPublic,
       },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -123,9 +124,9 @@ export async function deleteBoard(id: string) {
     await prisma.board.delete({
       where: { id },
     })
-    return new CustomResponse('200', 'Success')
+    return makeObject(new CustomResponse('200', 'Success'))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -137,10 +138,11 @@ export async function haveBoard(userId: string, boardId: string) {
       where: { id: boardId },
     })
 
-    if (board?.authorId === userId) return true
-    return false
+    if (board?.authorId === userId)
+      return makeObject(new CustomResponse('200', 'Success', true))
+    return makeObject(new CustomResponse('200', 'Success', false))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
 
@@ -151,9 +153,10 @@ export async function isShared(boardId: string) {
       where: { id: boardId },
     })
 
-    if (board?.isPublic === true) return true
-    return false
+    if (board?.isPublic === true)
+      return makeObject(new CustomResponse('200', 'Success', true))
+    return makeObject(new CustomResponse('200', 'Success', false))
   } catch (e) {
-    return new CustomResponse(e.code, e.message)
+    return makeObject(new CustomResponse(e.code, e.message))
   }
 }
