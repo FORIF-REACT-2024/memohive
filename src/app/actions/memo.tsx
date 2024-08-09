@@ -4,11 +4,11 @@
 
 'use server'
 
+import { Prisma } from '@prisma/client'
+
 import prisma from '@/lib/db'
 import CustomResponse from '@/lib/res'
 import makeObject from './makeobject'
-import { Prisma } from '@prisma/client'
-import { notFound } from 'next/navigation'
 
 /**
  * TODO 본인 소유의 보드인지 확인, 아니라면 isPublic 확인 후 true 라면 추가
