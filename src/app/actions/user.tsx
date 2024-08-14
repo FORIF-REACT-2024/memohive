@@ -38,6 +38,17 @@ export async function getUser(id: string) {
   }
 }
 
+export async function getUserbyEmail(email: string | null | undefined) {
+  try {
+    const user = await prisma.user.findFirst({
+      where: { email },
+    })
+    return makeObject(new CustomResponse('200', 'Success', user))
+  } catch (e) {
+    return makeObject(new CustomResponse(e.code, e.message))
+  }
+}
+
 /**
  * TODO 본인 확인 해야됨
  */
