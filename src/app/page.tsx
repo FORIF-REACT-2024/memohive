@@ -1,8 +1,11 @@
 import RevealOnScroll from '@/components/landing/RevealOnScroll'
 import Section1WordScroll from '@/components/landing/Section1WordScroll'
 import Section4 from '@/components/landing/Section4'
+import { checkLogin } from '@actions/auth'
 
 export default async function Home() {
+  await checkLogin()
+
   return (
     <div className="w-full flex justify-center flex-col">
       {/* 1 */}
