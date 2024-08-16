@@ -1,28 +1,23 @@
 'use client'
 
+import { notFound } from 'next/navigation'
 import { createMemo, getBoardMemos, updateMemo } from '@/app/actions/memo'
 import { Board, Memo } from '@/lib/types'
 import { useEffect, useState } from 'react'
-import _ from 'lodash'
 
 import MemoComponent from './MemoComponent'
 
 const memocolors = ['yellow', 'green', 'purple', 'pink']
 
 export default function BoardComponent({
-  initialMemo,
   boardId,
   boardInfo,
 }: {
-  initialMemo: Memo[]
   boardId: string
   boardInfo: Board
 }) {
-  const tempmemo = _.cloneDeep(initialMemo)
-  const tempmemohistory = _.cloneDeep(initialMemo)
-
-  const [memos, setMemos] = useState<Memo[]>(tempmemo)
-  const [memoHistory, setMemoHistory] = useState<Memo[]>(tempmemohistory)
+  const [memos, setMemos] = useState<Memo[] | undefined>(undefined)
+  const [memoHistory, setMemoHistory] = useState<Memo[] | undefined>(undefined)
   const [loading, setLoading] = useState<boolean>(false)
 
   const handleMemoState = (updatedMemos: Memo[]) => {
@@ -32,6 +27,20 @@ export default function BoardComponent({
   }
 
   useEffect(() => {
+    async function fetchData() {
+      const res = await getBoardMemos(boardId)
+
+      if (res.code === '200') {
+        setMemos(res.data)
+        setMemoHistory(res.data)
+      } else {
+        notFound()
+      }
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
     const delayDebounceTimer = setTimeout(() => {
       console.log('debounce called')
       console.log(memos)
@@ -39,8 +48,8 @@ export default function BoardComponent({
 
       setLoading(true)
 
-      memos.forEach(async (memo) => {
-        const prev = memoHistory.find((prevmemo) => memo.id === prevmemo.id)
+      memos?.forEach(async (memo) => {
+        const prev = memoHistory?.find((prevmemo) => memo.id === prevmemo.id)
         if (prev !== undefined) {
           if (prev.document !== memo.document) {
             console.log('difference detected')
