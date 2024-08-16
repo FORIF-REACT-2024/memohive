@@ -1,6 +1,6 @@
 import { getBoardMemos } from '@/app/actions/memo'
 import { notFound } from 'next/navigation'
-import { Memo, Board } from '@/lib/types'
+import { Board } from '@/lib/types'
 import { getBoard } from '@/app/actions/board'
 
 import BoardComponent from './components/BoardComponent'
@@ -34,17 +34,13 @@ export default async function BoardPage({
     notFound()
   }
 
-  const initialMemo: Memo[] = await getMemos()
+  await getMemos()
   const boardInfo: Board = await getBoardInfo()
 
   return (
     <div className="w-full flex items-center min-h-svh flex-col h-svh mt-36 text-3xl gap-6">
       <div className="flex w-full">
-        <BoardComponent
-          initialMemo={initialMemo}
-          boardId={params.id}
-          boardInfo={boardInfo}
-        />
+        <BoardComponent boardId={params.id} boardInfo={boardInfo} />
       </div>
     </div>
   )
